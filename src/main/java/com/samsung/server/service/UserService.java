@@ -1,17 +1,24 @@
 package com.samsung.server.service;
 
+import com.samsung.server.controller.dto.UserProfileDto;
+import com.samsung.server.controller.dto.UserRegisterDto;
+import com.samsung.server.domain.Authority;
 import com.samsung.server.domain.User;
 
 import java.util.List;
 
 public interface UserService {
-    User add(User user);
+    UserProfileDto add(UserRegisterDto userRegisterDto);
 
-    List<User> getAll();
+    List<UserProfileDto> getAll();
 
-    User getById(long id);
+    UserProfileDto getById(long id);
 
-    User update(long id, User user);
+    UserProfileDto update(long id, UserProfileDto userProfileDto);
+
+    void update(Long id, Authority authority);
 
     void deleteById(long id);
+
+    UserProfileDto getByUsername(String username);
 }
