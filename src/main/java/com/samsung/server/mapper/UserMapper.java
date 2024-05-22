@@ -11,9 +11,7 @@ public class UserMapper {
     public User toUserEntity (UserProfileDto userProfileDto) {
         return User.builder()
                 .id(userProfileDto.getId())
-                .name(userProfileDto.getName())
                 .username(userProfileDto.getUsername())
-                .email(userProfileDto.getEmail())
                 .photoUrl(userProfileDto.getPhotoUrl())
                 .build();
     }
@@ -22,7 +20,6 @@ public class UserMapper {
         User user = User.builder()
                 .username(userRegisterDto.getUsername())
                 .password(userRegisterDto.getPassword())
-                .email(userRegisterDto.getEmail())
                 .build();
 
         if (userRegisterDto.getId() != null) user.setId(userRegisterDto.getId());
@@ -33,8 +30,7 @@ public class UserMapper {
     public UserProfileDto toUserProfileDto(User user) {
         return UserProfileDto.builder()
                 .id(user.getId())
-                .name(user.getName())
-                .email(user.getEmail())
+                .username(user.getUsername())
                 .photoUrl(user.getPhotoUrl())
                 .build();
     }
@@ -45,7 +41,6 @@ public class UserMapper {
                 .id(user.getId())
                 .username(user.getUsername())
                 .password(user.getPassword())
-                .email(user.getPassword())
                 .build();
     }
 

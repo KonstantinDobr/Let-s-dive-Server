@@ -5,8 +5,8 @@ import com.samsung.server.controller.dto.UserRegisterDto;
 import com.samsung.server.domain.Authority;
 import com.samsung.server.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -49,14 +49,15 @@ public class UserController {
     }
 
     @GetMapping("/username/{username}")
-    public String getByUsername(@PathVariable String username) {
+    public UserProfileDto getByUsername(@PathVariable String username) {
         UserProfileDto byUsername = userService.getByUsername(username);
 
-        return "User " + byUsername.getUsername() + " is registered";
+        return userService.getByUsername(username);
     }
 
     @GetMapping("/login")
+    @ResponseStatus(HttpStatus.OK)
     public UserProfileDto login(Authentication authentication) {
-        return userService.getByUsername(authentication.name());
+        return userService.getByUsername(authentication.getName());
     }
 }

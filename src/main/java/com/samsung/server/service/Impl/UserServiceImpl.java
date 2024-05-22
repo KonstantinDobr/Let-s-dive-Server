@@ -72,10 +72,8 @@ public class UserServiceImpl implements UserService {
         if (!optionalUser.isPresent()) throw new UserNotFoundException("User with Id " + id + " not found");
 
         User user = optionalUser.get();
-        if (userProfileDto.getName() != null) user.setName(userProfileDto.getName());
-        if (userProfileDto.getUsername() != null) user.setName(userProfileDto.getUsername());
-        if (userProfileDto.getEmail() != null) user.setName(userProfileDto.getEmail());
-        if (userProfileDto.getPhotoUrl() != null) user.setName(userProfileDto.getPhotoUrl());
+        if (userProfileDto.getUsername() != null) user.setUsername(userProfileDto.getUsername());
+        if (userProfileDto.getPhotoUrl() != null) user.setPhotoUrl(userProfileDto.getPhotoUrl());
 
         return UserMapper.toUserProfileDto(userDao.save(user));
     }
