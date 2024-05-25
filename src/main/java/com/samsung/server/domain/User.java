@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -26,6 +27,9 @@ public class User implements UserDetails {
 
     @Column(name = "photoUrl")
     private String photoUrl;
+
+    @OneToMany
+    private Set<Record> records = new HashSet<>();
 
     @Column(name = "password")
     private String password;

@@ -60,4 +60,9 @@ public class UserController {
     public UserProfileDto login(Authentication authentication) {
         return userService.getByUsername(authentication.getName());
     }
+
+    @PutMapping("/{userId}/{recordId}")
+    public UserProfileDto addRecord(@PathVariable long userId, @PathVariable long recordId) {
+        return userService.addRecord(userId, recordId);
+    }
 }

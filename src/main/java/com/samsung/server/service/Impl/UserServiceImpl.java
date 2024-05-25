@@ -3,9 +3,12 @@ package com.samsung.server.service.Impl;
 import com.samsung.server.controller.dto.UserProfileDto;
 import com.samsung.server.controller.dto.UserRegisterDto;
 import com.samsung.server.dao.AuthorityDao;
+import com.samsung.server.dao.RecordDao;
 import com.samsung.server.dao.UserDao;
 import com.samsung.server.domain.Authority;
+import com.samsung.server.domain.Record;
 import com.samsung.server.domain.User;
+import com.samsung.server.exception.RecordNotFoundException;
 import com.samsung.server.exception.UserAlreadyExistsException;
 import com.samsung.server.exception.UserNotFoundException;
 import com.samsung.server.mapper.UserMapper;
@@ -26,6 +29,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;
     private final AuthorityDao authorityDao;
+    private final RecordDao recordDao;
     private final PasswordEncoder passwordEncoder;
 
 
@@ -74,6 +78,7 @@ public class UserServiceImpl implements UserService {
         User user = optionalUser.get();
         if (userProfileDto.getUsername() != null) user.setUsername(userProfileDto.getUsername());
         if (userProfileDto.getPhotoUrl() != null) user.setPhotoUrl(userProfileDto.getPhotoUrl());
+        if (userProfileDto.getRecords() != null) user.setRecords(userProfileDto.getRecords());
 
         return UserMapper.toUserProfileDto(userDao.save(user));
     }
@@ -112,5 +117,25 @@ public class UserServiceImpl implements UserService {
         if (!optionalUser.isPresent()) throw new UserNotFoundException("User with username " + username + " not found");
 
         return UserMapper.toUserProfileDto(optionalUser.get());
+    }
+
+    @Override
+    public UserProfileDto addRecord(long userId, long recordId) {
+        Optional<Record> optionalRecord = recordDao.findById(recordId);
+        if(!optionalRecord.isPresent()) throw new RecordNotFoundException("Record with Id " + recordId + " not found");
+        Record record = optionalRecord.get();
+
+        Optional<User> optionalUser = userDao.findById(userId);
+        if(!optionalUser.isPresent()) throw new UserNotFoundException("User with Id " + userId + " not found");
+        User user = optionalUser.get();
+
+        Set<Record> records = user.getRecords();
+        records.add(record);
+
+        user.setRecords(records);
+
+        User result = userDao.save(user);
+
+        return UserMapper.toUserProfileDto(result);
     }
 }

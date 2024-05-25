@@ -13,6 +13,7 @@ public class UserMapper {
                 .id(userProfileDto.getId())
                 .username(userProfileDto.getUsername())
                 .photoUrl(userProfileDto.getPhotoUrl())
+                .records(userProfileDto.getRecords())
                 .build();
     }
 
@@ -32,6 +33,7 @@ public class UserMapper {
                 .id(user.getId())
                 .username(user.getUsername())
                 .photoUrl(user.getPhotoUrl())
+                .records(user.getRecords())
                 .build();
     }
 
