@@ -3,11 +3,14 @@ package com.samsung.server.service.Impl;
 import com.samsung.server.controller.dto.UserProfileDto;
 import com.samsung.server.controller.dto.UserRegisterDto;
 import com.samsung.server.dao.AuthorityDao;
+import com.samsung.server.dao.PlaceDao;
 import com.samsung.server.dao.RecordDao;
 import com.samsung.server.dao.UserDao;
 import com.samsung.server.domain.Authority;
+import com.samsung.server.domain.Place;
 import com.samsung.server.domain.Record;
 import com.samsung.server.domain.User;
+import com.samsung.server.exception.PlaceNotFoundException;
 import com.samsung.server.exception.RecordNotFoundException;
 import com.samsung.server.exception.UserAlreadyExistsException;
 import com.samsung.server.exception.UserNotFoundException;
@@ -30,6 +33,8 @@ public class UserServiceImpl implements UserService {
     private final UserDao userDao;
     private final AuthorityDao authorityDao;
     private final RecordDao recordDao;
+    private final PlaceDao placeDao;
+
     private final PasswordEncoder passwordEncoder;
 
 
@@ -137,5 +142,23 @@ public class UserServiceImpl implements UserService {
         User result = userDao.save(user);
 
         return UserMapper.toUserProfileDto(result);
+    }
+
+    @Override
+    public UserProfileDto addPlace(long userId, long placeId) {
+        Optional<Place> optionalPlace = placeDao.findById(placeId);
+        if (!optionalPlace.isPresent()) throw  new PlaceNotFoundException("Place with Id " + placeId + " not found");
+        Place place  = optionalPlace.get();
+
+        Optional<User> optionalUser = userDao.findById(userId);
+        if (!optionalUser.isPresent()) throw  new UserNotFoundException("User with Id " + userId + " not found");
+        User user = optionalUser.get();
+
+        Set<Place> places = user.getPlaces();
+        places.add(place);
+        user.setPlaces(places);
+
+        return UserMapper.toUserProfileDto(userDao.save(user));
+
     }
 }

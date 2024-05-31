@@ -3,7 +3,6 @@ package com.samsung.server.controller;
 import com.samsung.server.domain.Authority;
 import com.samsung.server.service.AuthorityService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

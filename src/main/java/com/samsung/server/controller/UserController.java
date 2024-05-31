@@ -61,8 +61,13 @@ public class UserController {
         return userService.getByUsername(authentication.getName());
     }
 
-    @PutMapping("/{userId}/{recordId}")
+    @PutMapping("/record/{userId}/{recordId}")
     public UserProfileDto addRecord(@PathVariable long userId, @PathVariable long recordId) {
         return userService.addRecord(userId, recordId);
+    }
+
+    @PutMapping("/place/{userId}/{placeId}")
+    public UserProfileDto addPlace(@PathVariable long userId, @PathVariable long placeId) {
+        return userService.addPlace(userId, placeId);
     }
 }

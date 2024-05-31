@@ -1,6 +1,7 @@
 package com.samsung.server.controller.dto;
 
 
+import com.samsung.server.domain.Place;
 import com.samsung.server.domain.Record;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,4 +19,5 @@ public class UserProfileDto {
     private String username;
     private String photoUrl;
     private Set<Record> records;
+    private Set<Place> places;
 }

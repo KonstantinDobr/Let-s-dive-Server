@@ -14,6 +14,7 @@ public class UserMapper {
                 .username(userProfileDto.getUsername())
                 .photoUrl(userProfileDto.getPhotoUrl())
                 .records(userProfileDto.getRecords())
+                .places(userProfileDto.getPlaces())
                 .build();
     }
 
@@ -34,6 +35,7 @@ public class UserMapper {
                 .username(user.getUsername())
                 .photoUrl(user.getPhotoUrl())
                 .records(user.getRecords())
+                .places(user.getPlaces())
                 .build();
     }
 

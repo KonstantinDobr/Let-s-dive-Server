@@ -1,6 +1,5 @@
 package com.samsung.server.controller;
 
-import com.samsung.server.controller.dto.UserRegisterDto;
 import com.samsung.server.domain.Record;
 import com.samsung.server.service.RecordService;
 import lombok.RequiredArgsConstructor;

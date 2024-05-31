@@ -31,6 +31,9 @@ public class User implements UserDetails {
     @OneToMany
     private Set<Record> records = new HashSet<>();
 
+    @OneToMany
+    private Set<Place> places = new HashSet<>();
+
     @Column(name = "password")
     private String password;
 
