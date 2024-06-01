@@ -8,4 +8,10 @@ public interface PlaceService {
 
     Place add(Place place);
 
+    void deleteById(long id);
+
+    void update(long id, Place place);
+
+    Place getByPlaceName(String placeName);
+
 }

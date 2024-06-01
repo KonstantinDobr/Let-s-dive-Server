@@ -70,4 +70,9 @@ public class UserController {
     public UserProfileDto addPlace(@PathVariable long userId, @PathVariable long placeId) {
         return userService.addPlace(userId, placeId);
     }
+
+    @PutMapping("/place/delete/{userId}/{placeId}")
+    public UserProfileDto deletePlace(@PathVariable long userId, @PathVariable long placeId) {
+        return userService.deletePlace(userId, placeId);
+    }
 }

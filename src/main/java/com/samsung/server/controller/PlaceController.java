@@ -22,4 +22,19 @@ public class PlaceController {
         return placeService.add(place);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable long id) {
+        placeService.deleteById(id);
+    }
+
+    @PutMapping("/{id}")
+    public void update(@PathVariable long id, @RequestBody Place place) {
+        placeService.update(id, place);
+    }
+
+    @GetMapping("/placeName/{placeName}")
+    public Place getByPlaceName(@PathVariable String placeName) {
+        return placeService.getByPlaceName(placeName);
+    }
+
 }

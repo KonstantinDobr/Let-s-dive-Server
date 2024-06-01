@@ -24,4 +24,6 @@ public interface UserService {
     UserProfileDto addRecord(long userId, long recordId);
 
     UserProfileDto addPlace(long userId, long placeId);
+
+    UserProfileDto deletePlace(long userId, long placeId);
 }

@@ -161,4 +161,22 @@ public class UserServiceImpl implements UserService {
         return UserMapper.toUserProfileDto(userDao.save(user));
 
     }
+
+    @Override
+    public UserProfileDto deletePlace(long userId, long placeId) {
+        Optional<User> optionalUser = userDao.findById(userId);
+        if (!optionalUser.isPresent()) throw  new UserNotFoundException("User with Id " + userId + " not found");
+        User user = optionalUser.get();
+
+        for (Place place : user.getPlaces()) {
+            if (place.getId() == placeId) {
+                Set<Place> places = user.getPlaces();
+                places.remove(place);
+                user.setPlaces(places);
+                break;
+            }
+        }
+
+        return UserMapper.toUserProfileDto(userDao.save(user));
+    }
 }
