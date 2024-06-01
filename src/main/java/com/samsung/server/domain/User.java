@@ -1,5 +1,6 @@
 package com.samsung.server.domain;
 
+import com.samsung.server.controller.dto.UserProfileDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,6 +25,12 @@ public class User implements UserDetails {
 
     @Column(name = "username")
     private String username;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "information")
+    private String information;
 
     @Column(name = "photoUrl")
     private String photoUrl;

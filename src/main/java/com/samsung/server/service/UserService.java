@@ -26,4 +26,6 @@ public interface UserService {
     UserProfileDto addPlace(long userId, long placeId);
 
     UserProfileDto deletePlace(long userId, long placeId);
+
+    UserProfileDto updateInfo(long id, String email, String info);
 }

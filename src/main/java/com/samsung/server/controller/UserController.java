@@ -75,4 +75,13 @@ public class UserController {
     public UserProfileDto deletePlace(@PathVariable long userId, @PathVariable long placeId) {
         return userService.deletePlace(userId, placeId);
     }
+
+    @PutMapping("/update/{id}/{email}")
+    public UserProfileDto updateInfo(
+            @PathVariable long id,
+            @PathVariable String email,
+            @RequestBody String info
+    ) {
+        return userService.updateInfo(id, email, info);
+    }
 }
