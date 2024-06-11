@@ -181,15 +181,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserProfileDto updateInfo(long id, String email, String info) {
+    public UserProfileDto updateInfo(long id, String email, String info, String photoUrl) {
         Optional<User> optionalUser = userDao.findById(id);
         if (!optionalUser.isPresent()) throw  new UserNotFoundException("User with Id " + id + " not found");
         User user = optionalUser.get();
 
-        info = info.substring(1, info.length() - 1);
-
         user.setEmail(email);
         user.setInformation(info);
+        user.setPhotoUrl(photoUrl);
 
         return UserMapper.toUserProfileDto(userDao.save(user));
     }

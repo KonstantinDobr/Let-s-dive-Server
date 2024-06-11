@@ -27,5 +27,5 @@ public interface UserService {
 
     UserProfileDto deletePlace(long userId, long placeId);
 
-    UserProfileDto updateInfo(long id, String email, String info);
+    UserProfileDto updateInfo(long id, String email, String info, String photoUrl);
 }

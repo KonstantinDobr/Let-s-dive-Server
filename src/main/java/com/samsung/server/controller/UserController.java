@@ -3,6 +3,7 @@ package com.samsung.server.controller;
 import com.samsung.server.controller.dto.UserProfileDto;
 import com.samsung.server.controller.dto.UserRegisterDto;
 import com.samsung.server.domain.Authority;
+import com.samsung.server.domain.Container;
 import com.samsung.server.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -76,12 +77,16 @@ public class UserController {
         return userService.deletePlace(userId, placeId);
     }
 
-    @PutMapping("/update/{id}/{email}")
+    @PutMapping("/update/{id}")
     public UserProfileDto updateInfo(
             @PathVariable long id,
-            @PathVariable String email,
-            @RequestBody String info
+            @RequestBody Container container
     ) {
-        return userService.updateInfo(id, email, info);
+        return userService.updateInfo(
+                id,
+                container.getEmail(),
+                container.getInformation(),
+                container.getPhotoUrl()
+        );
     }
 }
