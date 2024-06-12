@@ -31,6 +31,12 @@ public class Place {
     @Column(name = "longitude")
     private double longitude;
 
+    @Column(name = "recordId")
+    private long recordId;
+
+    @Column(name = "depth")
+    private long depth;
+
     @ManyToOne
     private User user;
 

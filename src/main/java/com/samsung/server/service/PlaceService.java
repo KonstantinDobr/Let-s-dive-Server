@@ -12,6 +12,6 @@ public interface PlaceService {
 
     void update(long id, Place place);
 
-    Place getByPlaceName(String placeName);
+    Place getByPlaceName(String placeName, long userId);
 
 }

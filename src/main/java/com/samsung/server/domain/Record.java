@@ -31,6 +31,9 @@ public class Record {
     @Column(name = "endDate")
     private String endDate;
 
+    @Column(name = "information")
+    private String information;
+
     @Column(name = "depth")
     private long depth;
 

@@ -19,7 +19,7 @@ spring:
 
     hibernate:
       #ddl-auto: none
-      ddl-auto: create-drop
+      ddl-auto: update
 
     # Показываем запросы
     show-sql: true

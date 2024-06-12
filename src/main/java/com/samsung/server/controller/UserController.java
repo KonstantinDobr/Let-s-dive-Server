@@ -4,6 +4,7 @@ import com.samsung.server.controller.dto.UserProfileDto;
 import com.samsung.server.controller.dto.UserRegisterDto;
 import com.samsung.server.domain.Authority;
 import com.samsung.server.domain.Container;
+import com.samsung.server.domain.Record;
 import com.samsung.server.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -63,7 +64,7 @@ public class UserController {
     }
 
     @PutMapping("/record/{userId}/{recordId}")
-    public UserProfileDto addRecord(@PathVariable long userId, @PathVariable long recordId) {
+    public Record addRecord(@PathVariable long userId, @PathVariable long recordId) {
         return userService.addRecord(userId, recordId);
     }
 
@@ -75,6 +76,11 @@ public class UserController {
     @PutMapping("/place/delete/{userId}/{placeId}")
     public UserProfileDto deletePlace(@PathVariable long userId, @PathVariable long placeId) {
         return userService.deletePlace(userId, placeId);
+    }
+
+    @PutMapping("/record/delete/{userId}/{recordId}")
+    public UserProfileDto deleteRecord(@PathVariable long userId, @PathVariable long recordId) {
+        return userService.deleteRecord(userId, recordId);
     }
 
     @PutMapping("/update/{id}")

@@ -23,4 +23,14 @@ public class RecordController {
     public Record add(@RequestBody Record record) {
         return recordService.add(record);
     }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable long id) {
+        recordService.deleteById(id);
+    }
+
+    @PutMapping("/{id}")
+    public Record update(@PathVariable long id, @RequestBody Record record) {
+        return recordService.update(id, record);
+    }
 }

@@ -6,4 +6,8 @@ public interface RecordService {
     Record getById(long id);
 
     Record add(Record record);
+
+    Record update(long id, Record record);
+
+    void deleteById(long id);
 }

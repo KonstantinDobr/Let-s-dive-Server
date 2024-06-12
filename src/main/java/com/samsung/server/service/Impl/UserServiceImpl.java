@@ -125,7 +125,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserProfileDto addRecord(long userId, long recordId) {
+    public Record addRecord(long userId, long recordId) {
         Optional<Record> optionalRecord = recordDao.findById(recordId);
         if(!optionalRecord.isPresent()) throw new RecordNotFoundException("Record with Id " + recordId + " not found");
         Record record = optionalRecord.get();
@@ -140,8 +140,27 @@ public class UserServiceImpl implements UserService {
         user.setRecords(records);
 
         User result = userDao.save(user);
+        UserMapper.toUserProfileDto(result);
 
-        return UserMapper.toUserProfileDto(result);
+        return record;
+    }
+
+    @Override
+    public UserProfileDto deleteRecord(long userId, long recordId) {
+        Optional<User> optionalUser = userDao.findById(userId);
+        if (!optionalUser.isPresent()) throw  new UserNotFoundException("User with Id " + userId + " not found");
+        User user = optionalUser.get();
+
+        for (Record record : user.getRecords()) {
+            if (record.getId() == recordId) {
+                Set<Record> records = user.getRecords();
+                records.remove(record);
+                user.setRecords(records);
+                break;
+            }
+        }
+
+        return UserMapper.toUserProfileDto(userDao.save(user));
     }
 
     @Override

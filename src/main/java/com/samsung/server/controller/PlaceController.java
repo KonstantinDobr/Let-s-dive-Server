@@ -32,9 +32,9 @@ public class PlaceController {
         placeService.update(id, place);
     }
 
-    @GetMapping("/placeName/{placeName}")
-    public Place getByPlaceName(@PathVariable String placeName) {
-        return placeService.getByPlaceName(placeName);
+    @GetMapping("/placeName/{placeName}/{userId}")
+    public Place getByPlaceName(@PathVariable String placeName, @PathVariable long userId) {
+        return placeService.getByPlaceName(placeName, userId);
     }
 
 }
